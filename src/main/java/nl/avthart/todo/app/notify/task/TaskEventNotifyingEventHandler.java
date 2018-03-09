@@ -1,18 +1,20 @@
 package nl.avthart.todo.app.notify.task;
 
-import nl.avthart.todo.app.domain.task.events.TaskCompletedEvent;
-import nl.avthart.todo.app.domain.task.events.TaskCreatedEvent;
-import nl.avthart.todo.app.domain.task.events.TaskEvent;
-import nl.avthart.todo.app.domain.task.events.TaskStarredEvent;
-import nl.avthart.todo.app.domain.task.events.TaskUnstarredEvent;
-import nl.avthart.todo.app.domain.task.events.TaskTitleModifiedEvent;
-import nl.avthart.todo.app.query.task.TaskEntry;
-import nl.avthart.todo.app.query.task.TaskEntryRepository;
+import java.util.Optional;
 
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Component;
+
+import nl.avthart.todo.app.domain.task.events.TaskCompletedEvent;
+import nl.avthart.todo.app.domain.task.events.TaskCreatedEvent;
+import nl.avthart.todo.app.domain.task.events.TaskEvent;
+import nl.avthart.todo.app.domain.task.events.TaskStarredEvent;
+import nl.avthart.todo.app.domain.task.events.TaskTitleModifiedEvent;
+import nl.avthart.todo.app.domain.task.events.TaskUnstarredEvent;
+import nl.avthart.todo.app.query.task.TaskEntry;
+import nl.avthart.todo.app.query.task.TaskEntryRepository;
 
 /**
  * @author albert
@@ -37,26 +39,26 @@ public class TaskEventNotifyingEventHandler {
 
 	@EventHandler
 	void on(TaskCompletedEvent event) {
-		TaskEntry task = taskEntryRepository.findOne(event.getId());
-		publish(task.getUsername(), event);
+		Optional<TaskEntry> task = taskEntryRepository.findById(event.getId());
+		publish(task.get().getUsername(), event);
 	}
 	
 	@EventHandler
 	void on(TaskTitleModifiedEvent event) {
-		TaskEntry task = taskEntryRepository.findOne(event.getId());
-		publish(task.getUsername(), event);
+		Optional<TaskEntry> task = taskEntryRepository.findById(event.getId());
+		publish(task.get().getUsername(), event);
 	}
 	
 	@EventHandler
 	void on (TaskStarredEvent event) {
-		TaskEntry task = taskEntryRepository.findOne(event.getId());
-		publish(task.getUsername(), event);
+		Optional<TaskEntry> task = taskEntryRepository.findById(event.getId());
+		publish(task.get().getUsername(), event);
 	}
 	
 	@EventHandler
 	void on (TaskUnstarredEvent event) {
-		TaskEntry task = taskEntryRepository.findOne(event.getId());
-		publish(task.getUsername(), event);
+		Optional<TaskEntry> task = taskEntryRepository.findById(event.getId());
+		publish(task.get().getUsername(), event);
 	}
 	
 	private void publish(String username, TaskEvent event) {

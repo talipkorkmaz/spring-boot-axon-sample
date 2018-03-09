@@ -4,19 +4,8 @@ import java.security.Principal;
 
 import javax.validation.Valid;
 
-import lombok.RequiredArgsConstructor;
-import nl.avthart.todo.app.domain.task.commands.CompleteTaskCommand;
-import nl.avthart.todo.app.domain.task.commands.CreateTaskCommand;
-import nl.avthart.todo.app.domain.task.commands.ModifyTaskTitleCommand;
-import nl.avthart.todo.app.domain.task.commands.StarTaskCommand;
-import nl.avthart.todo.app.query.task.TaskEntry;
-import nl.avthart.todo.app.query.task.TaskEntryRepository;
-import nl.avthart.todo.app.rest.task.requests.CreateTaskRequest;
-import nl.avthart.todo.app.rest.task.requests.ModifyTitleRequest;
-
 import org.axonframework.commandhandling.gateway.CommandGateway;
 import org.axonframework.common.IdentifierFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
@@ -30,6 +19,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+
+import lombok.RequiredArgsConstructor;
+import nl.avthart.todo.app.domain.task.commands.CompleteTaskCommand;
+import nl.avthart.todo.app.domain.task.commands.CreateTaskCommand;
+import nl.avthart.todo.app.domain.task.commands.ModifyTaskTitleCommand;
+import nl.avthart.todo.app.domain.task.commands.StarTaskCommand;
+import nl.avthart.todo.app.query.task.TaskEntry;
+import nl.avthart.todo.app.query.task.TaskEntryRepository;
+import nl.avthart.todo.app.rest.task.requests.CreateTaskRequest;
+import nl.avthart.todo.app.rest.task.requests.ModifyTitleRequest;
 
 /**
  * @author albert

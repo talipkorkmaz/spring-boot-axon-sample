@@ -5,6 +5,7 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 
 @Configuration
 @EnableWebSecurity
@@ -28,6 +29,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 			.logout()
 				.logoutSuccessUrl("/login.html?logout")
 				.permitAll();
+		
+		http.headers().frameOptions().disable();
+
 	}
 
 
@@ -35,6 +39,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth
 			.inMemoryAuthentication()
+			.passwordEncoder(NoOpPasswordEncoder.getInstance())
 				.withUser("albert").password("1234").roles("USER").and()
 				.withUser("foo").password("bar").roles("USER");
 	}
