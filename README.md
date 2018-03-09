@@ -20,6 +20,13 @@ The Todo application makes use of the following design patterns:
 
 Browse to http://localhost:8080/index.html
 
+## Access h2_console
+
+- Username : sa
+- Password : <empty>
+- JDBC Url : jdbc:h2:mem:testdb
+- Driver Class : org.h2.Driver
+
 ## Implementation
 
 Implementation notes:

@@ -1,11 +1,18 @@
 spring:
   datasource:
-    jdbcUrl: jdbc:h2:mem:myDb;DB_CLOSE_DELAY=-1
+    jdbcUrl: jdbc:h2:mem:testdb
     username: sa
     password:
     driverClassName: org.h2.Driver
   jpa:
+    show-sql: true
     generate-ddl: true
+    hibernate:
+      ddl-auto: create
+      dialect: org.hibernate.dialect.H2Dialect
+      show_sql: true
+      use_sql_comments: true
+      format_sql: true
 server:
   port: 8081
 spring:
@@ -15,3 +22,9 @@ spring:
       path: /h2-console
   thymeleaf:
     cache: false
+    
+logging:
+  level:
+    org.springframework: info
+    #org.hibernate: debug
+    #org.hibernate.type: trace
